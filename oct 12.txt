@@ -1,0 +1,32 @@
+    at studentsReducer (file:///C:/Users/sai/Desktop/redux%20learning/reduxthunk.js:18:20)
+PS C:\Users\sai\Desktop\redux learning> node .\reduxthunk.js
+{
+  students: [
+    { id: 1, hobby: 'cricket' },
+    { id: 2, hobby: 'foot boll' },
+    { id: 3, hobby: 'volley boll' }
+  ],
+  hobbies: [
+    { id: 1, hobby: 'cricket' },
+    { id: 2, hobby: 'foot boll' },
+    { id: 3, hobby: 'volley boll' }
+  ]
+}
+file:///C:/Users/sai/Desktop/redux%20learning/reduxthunk.js:23
+              maths: student.marks.maths + action.payload.marks,
+                                   ^
+
+TypeError: Cannot read properties of undefined (reading 'maths')
+    at file:///C:/Users/sai/Desktop/redux%20learning/reduxthunk.js:23:36
+    at Array.map (<anonymous>)
+    at studentsReducer (file:///C:/Users/sai/Desktop/redux%20learning/reduxthunk.js:18:20)
+    at combination (file:///C:/Users/sai/Desktop/redux%20learning/node_modules/redux/dist/redux.mjs:315:31)
+    at dispatch (file:///C:/Users/sai/Desktop/redux%20learning/node_modules/redux/dist/redux.mjs:160:22)
+    at Object.dispatch (file:///C:/Users/sai/Desktop/redux%20learning/node_modules/redux-thunk/dist/redux-thunk.mjs:7:12)
+    at Timeout._onTimeout (file:///C:/Users/sai/Desktop/redux%20learning/reduxthunk.js:112:9)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+
+Node.js v18.16.0
+
+when we have both reducers has same action types

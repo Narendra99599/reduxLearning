@@ -1,0 +1,21 @@
+{
+  "name": "redux-learning",
+  "version": "1.0.0",
+  "description": "this is used for react redux learning",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-redux",
+    "redux"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
+  }
+}
