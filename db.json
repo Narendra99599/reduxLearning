@@ -35,17 +35,17 @@
     "hobbies": [
         {
             "id" : 1,
-            "hobby" : "cricket"
+            "hobbie" : "cricket"
 
         },
         {
             "id" : 2,
-            "hobby" : "foot boll"
+            "hobbie" : "foot boll"
 
         },
         {
             "id" : 3,
-            "hobby" : "volley boll"
+            "hobbie" : "volley boll"
 
         }
     ]

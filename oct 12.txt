@@ -30,3 +30,4 @@ TypeError: Cannot read properties of undefined (reading 'maths')
 Node.js v18.16.0
 
 when we have both reducers has same action types
+now it is global state

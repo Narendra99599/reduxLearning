@@ -1,19 +1,21 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { thunk } from "redux-thunk";
 
-//action creators names for studbets
-const studentsInit = "intilization";
-const incrementMarks = "incrementMarks";
-const incrementMarksForSubject = "incrementMarksForSubject";
+// Action types for students
+const studentsInit = "students/intilization";
+const incrementMarks = "students/incrementMarks";
+const incrementMarksForSubject = "students/incrementMarksForSubject";
 
-//action creators names for hobbies
-const hobbiesInit = "intilization";
-const hobbieChange = "changeHobbie";
+// Action types for hobbies
+const hobbiesInit = "hobbies/intilization";
+const hobbieChange = "hobbies/changeHobbie";
 
+// Reducer for students
 function studentsReducer(state = [], action) {
   switch (action.type) {
     case studentsInit:
       return action.payload;
+
     case incrementMarks:
       return state.map((student) => {
         if (student.id === action.payload.id) {
@@ -43,41 +45,45 @@ function studentsReducer(state = [], action) {
         }
         return student;
       });
+
     default:
       return state;
   }
 }
 
+// Reducer for hobbies
 const hobbiesReducer = (state = [], action) => {
   switch (action.type) {
     case hobbiesInit:
       return action.payload;
+
     case hobbieChange:
-      state.map((hobby) => {
-        if (hobby.id === action.payload.id) {
+      return state.map((hobbie) => {
+        if (hobbie.id === action.payload.id) {
           return {
-            ...hobby,
-            id: action.payload.id,
-            hobby: action.payload.hobby,
+            ...hobbie,
+            hobbie: action.payload.hobbie,
           };
         }
-        return hobby;
+        return hobbie;
       });
+
     default:
       return state;
   }
 };
 
-const store = createStore(
-  combineReducers({
-    students: studentsReducer,
-    hobbies: hobbiesReducer,
-  }),
-  applyMiddleware(thunk)
-);
+// Combine reducers
+const rootReducer = combineReducers({
+  students: studentsReducer,
+  hobbies: hobbiesReducer,
+});
 
-//action creators
-const getStudents = async (dispatch, getState) => {
+// Create Redux store with thunk middleware
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// Async action to get students
+const getStudents = async (dispatch) => {
   const response = await fetch("http://localhost:3000/students");
   const data = await response.json();
   dispatch({
@@ -86,7 +92,8 @@ const getStudents = async (dispatch, getState) => {
   });
 };
 
-const getHobbies = async (dispatch, getState) => {
+// Async action to get hobbies
+const getHobbies = async (dispatch) => {
   const response = await fetch("http://localhost:3000/hobbies");
   const data = await response.json();
   dispatch({
@@ -95,6 +102,7 @@ const getHobbies = async (dispatch, getState) => {
   });
 };
 
+// Action creator to increment marks
 const incrementByMarks = () => {
   return {
     type: incrementMarks,
@@ -105,11 +113,36 @@ const incrementByMarks = () => {
   };
 };
 
-store.dispatch(getHobbies);
+// Action creator to change a hobbie
+const hobbieChangeActionCreator = (id, hobbie) => {
+  return {
+    type: hobbieChange,
+    payload: {
+      id,
+      hobbie,
+    },
+  };
+};
 
+// Dispatch initial actions
+store.dispatch(getHobbies);
+store.dispatch(getStudents);
+
+// Simulating delayed state update
 setTimeout(() => {
+  console.log("Initial State:");
   console.log(store.getState());
+
+  // Dispatch actions
   store.dispatch(incrementByMarks());
+  store.dispatch(hobbieChangeActionCreator(1, "sketch"));
+
   console.log("*************************************");
-  console.log(store.getState());
+
+  // Log updated state
+  console.log("Updated Students:");
+  console.log(store.getState().students);
+
+  console.log("Updated Hobbies:");
+  console.log(store.getState().hobbies);
 }, 3000);
